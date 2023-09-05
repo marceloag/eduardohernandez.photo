@@ -1,4 +1,13 @@
 ---
+import {ViewTransitions} from 'astro:transitions';
+import Logo from "./components/logo.astro";
+import Rss from "./components/rss.astro";
+import Menu from "./components/menu.astro";
+import { Image, getImage } from 'astro:assets';
+import patrimonio from '../assets/patrimonio.jpg';
+import gaucho from '../assets/gaucho.jpg';
+const patrimonioOptimized = await getImage({src: patrimonio, width: 1600, quality: 80, loading: 'lazy' });
+const gauchoOptimized = await getImage({src: gaucho, width: 1600, quality: 80, loading: 'lazy' });
 ---
 
 <html lang="en">
@@ -7,11 +16,30 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Eduardo Hernandez Photography 📸 </title>
 	</head>
 	<body>
-		<main class="h-screen bg-gray-950 text-white grid place-items-center w-full">
-        <h1 class="text-6xl text-white font-extrabold">Eduardo Hernandez Photo 📸 </h1>
+  <div class="snap-y snap-mandatory overflow-y-scroll h-screen w-screen">
+		<main class="h-screen bg-gray-950 text-white flex flex-col w-full snap-start bg-no-repeat bg-cover bg-top" style=`background-image: url(${gauchoOptimized.src}`>
+        <nav class="flex flex-row items-center justify-between w-full p-3">
+          <Rss/>
+          <Logo/>
+          <Menu/>    
+        </nav>
     </main>
+    <section class="h-screen text-white flex flex-row justify-center items-center w-full snap-start relative bg-center bg-no-repeat bg-cover" >
+      <article class="w-1/2 h-screen flex flex-col justify-center items-center" style=`background-image: url(${patrimonioOptimized.src}`)>
+        <h1 class="text-8xl text-white font-extrabold">PATRIMONIO</h1>
+        <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Default</button>
+      </article>
+      <article class="w-1/2 h-screen flex flex-col justify-center items-center">
+                <h1 class="text-8xl text-white font-extrabold">PATRIMONIO</h1>
+        <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Default</button>
+      </article>
+    </section>
+    <section class="h-screen bg-violet-800 text-white grid place-items-center w-full snap-start">
+        <h1 class="text-6xl text-white font-extrabold">Seccion 02</h1>
+    </section>
+  </div>
 	</body>
 </html>
